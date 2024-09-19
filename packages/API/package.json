@@ -15,6 +15,6 @@
   ],
   "scripts": {
     "tsc": "tsc",
-    "test": "node ./__tests__/API.test.js"
+    "test": "node ./__tests__/api.test.js"
   }
 }
