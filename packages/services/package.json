@@ -1,0 +1,19 @@
+{
+  "name": "services",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "DESKTOP-MQQ1HID\\ferna <fernandomata@outlook.es>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/services.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/services.test.js"
+  }
+}
