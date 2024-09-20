@@ -20,6 +20,7 @@ model User {
   posts     Post[]  // Relation to Post model (one-to-many)
   password  String?
   role     String   @default("user")
+  profilePicture String?  // Nullable profile picture field
 }
 
 model Post {
