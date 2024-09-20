@@ -18,6 +18,8 @@ model User {
   name      String
   email     String  @unique
   posts     Post[]  // Relation to Post model (one-to-many)
+  password  String?
+  role     String   @default("user")
 }
 
 model Post {

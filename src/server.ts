@@ -6,6 +6,19 @@ import prisma from './prisma';
 
 const server: FastifyInstance = Fastify({ logger: true });
 
+// Register JWT Plugin
+server.register(require('@fastify/jwt'), {
+  secret: process.env.JWT_SECRET || 'There is no JWT secret defined',
+});
+// JWT Authentication Hook
+server.decorate('authenticate', async (request, reply) => {
+  try {
+    await request.jwtVerify();
+  } catch (err) {
+    reply.send(err);
+  }
+});
+
 // Register plugins
 setupCors(server);
 setupSensible(server);
