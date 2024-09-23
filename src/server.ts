@@ -6,7 +6,7 @@ import prisma from './prisma';
 import multipart from '@fastify/multipart';
 import fastifyStatic from '@fastify/static';
 import { join } from 'path';
-
+import fileRoutes from './routes/fileRoutes';
 
 const server: FastifyInstance = Fastify({ logger: true });
 
@@ -34,6 +34,7 @@ server.register(multipart, {
 
 // Register routes
 server.register(appRoutes);
+server.register(fileRoutes);
 
 // Close Prisma connection when the server stops
 server.addHook('onClose', async () => {

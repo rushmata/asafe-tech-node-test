@@ -2,47 +2,17 @@ import { FastifyInstance } from "fastify";
 import prisma from "../prisma";
 import { compare, hash } from "bcrypt";
 import { authorizeRoles } from "../plugins/authorization";
-import { createWriteStream } from "fs";
-import { join } from "path";
+
+
+import { config } from "dotenv";
+import AWS = require("aws-sdk");
+
+config();
 
 export const appRoutes = async (fastify: FastifyInstance) => {
   fastify.get("/", async (request, reply) => {
     return { hello: "world" };
   });
-  // Upload profile picture (Authenticated route)
-  fastify.post(
-    "/upload-profile-picture",
-    {
-      preValidation: [fastify.authenticate], // Require authentication
-    },
-    async (request, reply) => {
-      // Handle file upload
-      const file = await request.file();
-
-      if (!file || Object.keys(file).length === 0) {
-        return reply.status(400).send({ message: "No file uploaded" });
-      }
-
-      const userId = (request.user as any).id;
-      const fileName = `${userId}-${Date.now()}-${file.filename}`;
-      const uploadPath = join(__dirname, "../../uploads", fileName);
-
-      // Save the file to the upload directory
-      const fileStream = createWriteStream(uploadPath);
-      await file.file.pipe(fileStream); // Pipe the file data to the file stream
-
-      // Update user's profile picture in the database
-      const user = await prisma.user.update({
-        where: { id: userId },
-        data: { profilePicture: `/uploads/${fileName}` }, // Store file path
-      });
-
-      return reply.send({
-        message: "Profile picture uploaded successfully",
-        user,
-      });
-    }
-  );
   // Register User
   fastify.post("/register", async (request, reply) => {
     const { name, email, password, role } = request.body as {
