@@ -5,7 +5,6 @@ import { authorizeRoles } from "../plugins/authorization";
 
 
 import { config } from "dotenv";
-import AWS = require("aws-sdk");
 
 config();
 
