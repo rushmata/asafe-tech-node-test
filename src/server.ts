@@ -3,6 +3,10 @@ import { appRoutes } from './routes/index';
 import { setupCors } from './plugins/cors';
 import { setupSensible } from './plugins/sensible';
 import prisma from './prisma';
+import multipart from '@fastify/multipart';
+import fastifyStatic from '@fastify/static';
+import { join } from 'path';
+
 
 const server: FastifyInstance = Fastify({ logger: true });
 
@@ -22,13 +26,25 @@ server.decorate('authenticate', async (request, reply) => {
 // Register plugins
 setupCors(server);
 setupSensible(server);
+server.register(multipart, {
+  limits: {
+    fileSize: 10 * 1024 * 1024, // Set max file size to 10MB
+  },
+});
 
 // Register routes
 server.register(appRoutes);
+
 // Close Prisma connection when the server stops
 server.addHook('onClose', async () => {
   await prisma.$disconnect();
 });
+// Serve static files from the "uploads" directory
+server.register(fastifyStatic, {
+  root: join(__dirname, 'uploads'),
+  prefix: '/uploads/', // Static file prefix
+});
+
 server.listen({ port: 3000 }, (err, address) => {
   if (err) {
     server.log.error(err);
