@@ -4,7 +4,7 @@ import {
 } from "../controllers/fileController.js";
 import { FastifyInstance } from "fastify";
 
-const fileRoutes = async (fastify: FastifyInstance) => {
+export const fileRoutes = async (fastify: FastifyInstance) => {
   fastify.post(
     "/upload-profile-picture-aws",
     {
@@ -21,5 +21,3 @@ const fileRoutes = async (fastify: FastifyInstance) => {
     uploadProfilePicture
   );
 };
-
-export default fileRoutes;

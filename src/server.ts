@@ -1,12 +1,13 @@
 import Fastify, { FastifyInstance } from 'fastify';
-import { appRoutes } from './routes/index';
+import { userRoutes } from './routes/userRoutes';
+import { fileRoutes } from './routes/fileRoutes';
 import { setupCors } from './plugins/cors';
 import { setupSensible } from './plugins/sensible';
 import prisma from './prisma';
 import multipart from '@fastify/multipart';
 import fastifyStatic from '@fastify/static';
 import { join } from 'path';
-import fileRoutes from './routes/fileRoutes';
+import { postRoutes } from './routes/postRoutes';
 
 const server: FastifyInstance = Fastify({ logger: true });
 
@@ -33,8 +34,9 @@ server.register(multipart, {
 });
 
 // Register routes
-server.register(appRoutes);
+server.register(userRoutes);
 server.register(fileRoutes);
+server.register(postRoutes);
 
 // Close Prisma connection when the server stops
 server.addHook('onClose', async () => {

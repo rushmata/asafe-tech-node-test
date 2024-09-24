@@ -8,9 +8,9 @@ import { config } from "dotenv";
 
 config();
 
-export const appRoutes = async (fastify: FastifyInstance) => {
+export const userRoutes = async (fastify: FastifyInstance) => {
   fastify.get("/", async (request, reply) => {
-    return { hello: "world" };
+    return { hello: "a-safe node tech test" };
   });
   // Register User
   fastify.post("/register", async (request, reply) => {
@@ -53,7 +53,7 @@ export const appRoutes = async (fastify: FastifyInstance) => {
     }
 
     // Verify the password
-    const isPasswordValid = await compare(password, user.password);
+    const isPasswordValid = await compare(password, user.password || "");
     if (!isPasswordValid) {
       return reply.status(401).send({ message: "Invalid email or password" });
     }

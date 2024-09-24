@@ -32,7 +32,7 @@ export const uploadProfilePictureToS3 = async (request, reply) => {
       message: "Profile picture uploaded successfully",
       user,
     });
-  } catch (err) {
+  } catch (err: any) {
     reply.code(500).send({ error: err.message });
   }
 };
