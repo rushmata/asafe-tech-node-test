@@ -9,7 +9,7 @@ import fastifyStatic from '@fastify/static';
 import { join } from 'path';
 import { postRoutes } from './routes/postRoutes';
 
-const server: FastifyInstance = Fastify({ logger: true });
+export const server: FastifyInstance = Fastify({ logger: true });
 
 // Register JWT Plugin
 server.register(require('@fastify/jwt'), {

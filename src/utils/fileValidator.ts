@@ -1,10 +1,10 @@
-export const validateFile = (file) => {
+
+export const validateFile = (file: { mimetype: string; file: { truncated: boolean }} | undefined): boolean => {
   if (!file || Object.keys(file).length === 0) {
     throw new Error("No file uploaded");
   }
 
   const allowedMimeTypes = ["image/jpeg", "image/png"];
-  const maxFileSize = 10 * 1024 * 1024; // 10MB
 
   if (!allowedMimeTypes.includes(file.mimetype)) {
     throw new Error("Invalid file type. Only JPEG and PNG files are allowed.");

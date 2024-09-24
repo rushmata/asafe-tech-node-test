@@ -14,13 +14,14 @@
     "target": "es6",
     "sourceMap": true,
     "lib": ["es6"],
-    "types": ["@fastify/multipart"],
+    "types": ["@fastify/multipart", "jest"],
     "outDir": "./build" /* Redirect output structure to the directory. */,
     "rootDir": "./src" /* Specify the root directory of input files. Use to control the output */
   },
   "include": [
     "src/**/*.ts",
-    "src/types/**/*.d.ts"
+    "src/types/**/*.d.ts",
+    "src/__tests__/**/*.ts"
   ],
   "exclude": ["node_modules", "**/*.spec.ts","build"]
 }
