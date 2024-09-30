@@ -23,15 +23,23 @@ This project is a Fastify-based API that uses Prisma ORM for database interactio
 |   ├── __tests__                   # Unit tests
 │   |   ├── integration             # Integration tests
 |   │   └── unit                    # Unit tests
+│   ├── plugins
+│   |   ├── authorization           # Handles the authorization roles for users
+│   |   ├── sensible                # to register fastify sensible in the server
+        └── cors.ts                 # to avoid cross domains
 │   ├── controllers
 │   │   ├── fileController.ts    # Handles files upload either locally or sending to S3 bucket AWS
+        └── postController.ts    # Business logic for posts
 │   ├── middlewares
 │   │   └── authenticate.js      # JWT authentication middleware
 │   ├── routes
+│   │   ├── userRoutes.ts        # user Routes (user CRUD)
 │   │   ├── fileRoutes.ts        # file routes (locally/AWS)
-│   │   └── index.ts             # routes (user CRUD)
+│   │   └── postRoutes.ts        # post routes (post Create and Read)
 │   ├── services
 │   │   ├── fileService.ts       # Business logic for uploading image files
+        └── postService.ts       # Creation or reading from DDBB 
+    ├── types                    # polyfil for typings needed
 │   ├── utils
 │   │   └── fileValidator.ts     # Input validators
 │   └── server.ts                   # Fastify server setup
