@@ -64,8 +64,12 @@ cd asafenodetechtest
 </code></pre>
 3. Configure environment variables: Create a .env file in the root directory and configure your environment variables:
 <pre><code>
-    DATABASE_URL="mysql://USER:PASSWORD@localhost:3306/Asafenodetechtest"
+    DATABASE_URL="postgresql://postgres:123456@localhost:5433/Asafenodetechtest?schema=public"
     JWT_SECRET="your_jwt_secret"
+    AWS_ACCESS_KEY_ID="Request it to the Owner of the project"
+    AWS_SECRET_ACCESS_KEY="The AWS secret access key, request to the Owner of the project"
+    AWS_REGION="us-east-1"
+    AWS_S3_BUCKET_NAME="asafe-node-tech-test"
 </code></pre>
 4. Set up the Prisma schema:
 <pre><code>
