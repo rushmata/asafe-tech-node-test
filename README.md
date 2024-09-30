@@ -100,14 +100,18 @@ Token Expiry: Set to 1h by default in the JWT utility.
 plugins/authorization.ts ensures that protected routes can only be accessed by authenticated users.
 
 ## Routes ## 
-- Auth Routes
+- File Routes (src/routes/fileRoutes.js)
+  - POST /upload-profile-picture-aws: upload jpg to S3 bucket AWS
+  - POST /upload-profile-picture: upload jpg to uploads folder locally  ;
+- Post Routes (src/routes/postRoutes.js)
+  - POST /create-post: Create a new post (protected, requires JWT)
+  - GET /posts: Fetch all posts (public route)
+- Auth Routes (src/routes/userRoutes.js)
   - POST /register: Register a new user
   - POST /login: Login and retrieve a JWT token
   - GET  /protected: Protected Route (JWT required)
   - GET  /admin: Protected Admin Route (Only admins can access this route)
-- Post Routes (src/routes/postRoutes.js)
-  - GET /posts: Fetch all posts (public route)
-  - POST /posts: Create a new post (protected, requires JWT)
+- User Routes (src/routes/userRoutes.js)
   - GET /users: Fetch all users (public route)
   - GET /users:id Fetch a user by id as a path param (public route)
   - PUT /users:id Update a user by id as a path param (public route)
